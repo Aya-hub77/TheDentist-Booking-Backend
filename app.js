@@ -14,6 +14,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 app.use(helmet());
+app.set('trust proxy', 1);
 app.use(cors({
   origin: process.env.CLIENT_URL,
   methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
@@ -24,7 +25,6 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.set('trust proxy', 1);
 app.use(sessionMiddleware);
 
 app.use("/", router);
