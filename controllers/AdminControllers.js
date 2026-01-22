@@ -11,13 +11,10 @@ export const login = async (req, res, next) => {
     if (!user) return res.status(400).json({ message:"Invalid credentials" });
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(400).json({message:"Invalid credentials" });
-    req.session.regenerate((err) => {
+    req.session.user = { id: user._id.toString(), username: user.username, email: user.email };
+    req.session.save((err) => {
       if (err) return next(err);
-      req.session.user = { id: user._id.toString(), username: user.username, email: user.email };
-      req.session.save((err) => {
-        if (err) return next(err);
-        res.status(200).json({ message:'Logged in', user: req.session.user });
-      });
+      res.status(200).json({ message:'Logged in', user: req.session.user });
     });
   } catch (error) {
     next(error);
