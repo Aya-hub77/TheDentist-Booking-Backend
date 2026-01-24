@@ -33,14 +33,6 @@ export const logout = (req, res, next) => {
   });
 };
 
-export const getSessionUser = (req, res) => {
-  if (req.session && req.session.user) {
-    return res.status(200).json({ user: req.session.user });
-  }
-  return res.status(401).json({ message: "Not logged in" });
-};
-
-
 
 export const appointments = async (req, res, next) => {
   try {
