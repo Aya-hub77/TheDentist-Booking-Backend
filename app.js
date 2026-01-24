@@ -25,6 +25,10 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use((req, res, next) => {
+  console.log('Incoming Cookie Header:', req.headers.cookie);
+  next();
+});
 app.use(sessionMiddleware);
 
 app.use("/", router);
