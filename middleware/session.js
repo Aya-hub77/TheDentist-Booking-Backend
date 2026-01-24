@@ -10,9 +10,8 @@ const sessionMiddleware = session({
   cookie: {
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: true,
     sameSite: 'none',
-    domain: '.onrender.com',
   },
 });
 
