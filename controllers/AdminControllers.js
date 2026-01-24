@@ -14,7 +14,7 @@ export const login = async (req, res, next) => {
     req.session.regenerate((error) => {
       if (error) return next(error);
       req.session.user = { id: user._id.toString(), username: user.username };
-      req.session.save((err) => {
+      req.session.save((error) => {
         if (error) return next(error);
         res.status(200).json({ message: "Logged in" });
       });
